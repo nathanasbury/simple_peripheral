@@ -299,6 +299,7 @@ bool ADXL366_init(void)
 {
     SPI_Params spiParams;
     uint32_t nowMs;
+    bool partValid = false;
 
     GPIO_setConfig(CONFIG_GPIO_ADXL_CS, GPIO_CFG_OUT_STD | GPIO_CFG_OUT_HIGH);
     GPIO_write(CONFIG_GPIO_ADXL_CS, 1);
@@ -327,9 +328,20 @@ bool ADXL366_init(void)
         adxlPartId = ADXL366_readReg(ADXL366_REG_PART_ID);
         if (adxlPartId == 0xF7U) {
             adxlStatusFlags |= ADXL366_STATUS_PART_OK;
+            partValid = true;
         }
     } else {
         adxlPartId = 0U;
+    }
+
+    if (!partValid) {
+        adxlPartId = 0U;
+        GPIO_disableInt(CONFIG_GPIO_ADXL_INT);
+        GPIO_setCallback(CONFIG_GPIO_ADXL_INT, NULL);
+        SPI_close(spiAccelHandle);
+        spiAccelHandle = NULL;
+        adxlStatusFlags = 0U;
+        return false;
     }
 
     ADXL366_writeReg(ADXL366_REG_THRESH_ACT_L, 0x30);

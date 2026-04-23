@@ -5,8 +5,8 @@
 #include <unistd.h>
 #include "ti_drivers_config.h"
 
-#define AFE_GPIO_INT_PIN                  3U
-#define AFE_GPIO_CS_PIN                   4U
+#define AFE_GPIO_INT_PIN                  CONFIG_GPIO_AFE_INT
+#define AFE_GPIO_CS_PIN                   CONFIG_GPIO_AFE_CS
 #define AFE_SAMPLE_RATE_HZ                100U
 #define AFE_WINDOW_SIZE                   200U
 #define AFE_FIFO_MAX_ITEMS                128U
@@ -459,6 +459,13 @@ bool AFE_init(void)
     afePartId = MAX86140_readReg(MAX86140_PART_ID);
     if ((afePartId == 0x24U) || (afePartId == 0x25U)) {
         afeStatusFlags |= AFE_STATUS_PART_OK;
+    } else {
+        GPIO_disableInt(AFE_GPIO_INT_PIN);
+        GPIO_setCallback(AFE_GPIO_INT_PIN, NULL);
+        SPI_close(spiAfeHandle);
+        spiAfeHandle = NULL;
+        afeStatusFlags = 0U;
+        return false;
     }
 
     MAX86140_writeReg(MAX86140_PPG_CFG1, 0x1A);
