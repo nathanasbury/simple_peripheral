@@ -105,7 +105,7 @@
  * MACROS
  */
 #define USE_BLE_SIMULATOR                  0
-#define SENSOR_SELF_TEST_MODE              1
+#define SENSOR_SELF_TEST_MODE              0
 #define SP_USE_UART_DISPLAY                0
 
 #if !SP_USE_UART_DISPLAY
