@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?ccsproject version="1.0"?>
+<projectOptions>
+	<ccsVariant value="50:Theia-based"/>
+	<ccsVersion value="70.5.0"/>
+	<deviceFamily value="TMS470"/>
+	<connection value="common/targetdb/connections/TIXDS110_Connection.xml"/>
+	<executableActions value=""/>
+	<createSlaveProjects value=""/>
+	<ignoreDefaultDeviceSettings value="true"/>
+	<ignoreDefaultCCSSettings value="true"/>
+	<templateProperties value="id=simple_peripheral_LP_EM_CC2674P10_tirtos7_ticlang.projectspec.simple_peripheral,buildProfile=release,isHybrid=true"/>
+	<activeTargetConfiguration value="targetConfigs/CC2674R10.ccxml"/>
+	<isTargetConfigurationManual value="false"/>
+	<origin value="C:\ti\simplelink_cc13xx_cc26xx_sdk_8_32_00_07\examples\rtos\LP_EM_CC2674P10\ble5stack\simple_peripheral\tirtos7\ticlang\simple_peripheral_LP_EM_CC2674P10_tirtos7_ticlang.projectspec"/>
+	<filesToOpen value=""/>
+</projectOptions>
